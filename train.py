@@ -43,17 +43,34 @@ preprocessor = ColumnTransformer(transformers = [
         ], remainder = SimpleImputer(strategy = 'most_frequent')
     )
 # Fit a model
-depth = 3
-rf_model = RandomForestClassifier(max_depth=depth)
+n_estimators =  100
+
+min_samples_split =  2
+
+min_samples_leaf  =  2
+rf_model = RandomForestClassifier( n_estimators = n_estimators, 
+            min_samples_split = min_samples_split, 
+            min_samples_leaf = min_samples_leaf, class_weight = 'balanced')
 pipe_rf = Pipeline(steps = [
             ('preprocessor', preprocessor), ('classifier', rf_model)
         ])
 pipe_rf.fit(X_train, y_train)
 
-acc = pipe_rf.score(X_test, y_test)
-print(acc)
+y_pred =  pipe_rf.predict(X_test)
+acc = accuracy_score(y_test, y_pred)
+prec = precision_score(y_test, y_pred)
+rec = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+print('Accuracy: %.3f' % acc)
+print('Precision: %.3f' % prec)
+print('Recall: %.3f' % rec )
+print('F1 Score: %.3f' % f1)
+
 with open("metrics.txt", "w") as outfile:
     outfile.write("Accuracy: " + str(acc) + "\n")
+    outfile.write("Precision: " + str(prec) + "\n")
+    outfile.write("Recall: " + str(rec) + "\n")
+    outfile.write("F1 Score: " + str(f1) + "\n")
 
 # Plot it
 disp = ConfusionMatrixDisplay.from_estimator(
