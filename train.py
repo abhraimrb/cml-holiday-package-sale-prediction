@@ -22,32 +22,22 @@ numeric_features = [
         'DurationOfPitch', 
         'MonthlyIncome'
     ]
-
-    numeric_transformer = Pipeline(
+numeric_transformer = Pipeline(
         steps = [
             ('imputer', SimpleImputer(strategy = 'median')), 
             ("scaler", StandardScaler())
         ]
     )
+categorical_features = ['TypeofContact', 'Occupation', 'Gender', 'ProductPitched', 'MaritalStatus', 'Designation']
 
-    categorical_features = [
-        'TypeofContact', 
-        'Occupation', 
-        'Gender', 
-        'ProductPitched',
-        'MaritalStatus',
-        'Designation'
-    ]
-
-    categorical_transformer = Pipeline(
+categorical_transformer = Pipeline(
         steps = [
             ('imputer', SimpleImputer(strategy = 'most_frequent')),
             ('encoder', OneHotEncoder(handle_unknown = 'ignore'))
         ]
     )
-    
-    preprocessor = ColumnTransformer(
-        transformers = [
+
+preprocessor = ColumnTransformer(transformers = [
             ('num_tr', numeric_transformer, numeric_features),
             ('cat_tr', categorical_transformer, categorical_features)
         ], remainder = SimpleImputer(strategy = 'most_frequent')
