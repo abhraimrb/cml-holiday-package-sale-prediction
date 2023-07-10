@@ -16,6 +16,42 @@ y_train = np.genfromtxt("data/train_labels.csv")
 X_test = np.genfromtxt("data/test_features.csv")
 y_test = np.genfromtxt("data/test_labels.csv")
 
+
+numeric_features = [
+        'Age', 
+        'DurationOfPitch', 
+        'MonthlyIncome'
+    ]
+
+    numeric_transformer = Pipeline(
+        steps = [
+            ('imputer', SimpleImputer(strategy = 'median')), 
+            ("scaler", StandardScaler())
+        ]
+    )
+
+    categorical_features = [
+        'TypeofContact', 
+        'Occupation', 
+        'Gender', 
+        'ProductPitched',
+        'MaritalStatus',
+        'Designation'
+    ]
+
+    categorical_transformer = Pipeline(
+        steps = [
+            ('imputer', SimpleImputer(strategy = 'most_frequent')),
+            ('encoder', OneHotEncoder(handle_unknown = 'ignore'))
+        ]
+    )
+    
+    preprocessor = ColumnTransformer(
+        transformers = [
+            ('num_tr', numeric_transformer, numeric_features),
+            ('cat_tr', categorical_transformer, categorical_features)
+        ], remainder = SimpleImputer(strategy = 'most_frequent')
+    )
 # Fit a model
 depth = 2
 rf_model = RandomForestClassifier(max_depth=depth)
