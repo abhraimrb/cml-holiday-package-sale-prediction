@@ -9,7 +9,7 @@ package_sale_data.replace('Fe Male','Female', inplace = True)
 
 X = package_sale_data.drop(columns = ['ProdTaken'])
 y = package_sale_data['ProdTaken']# Make a train/test split
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=seed)
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=123)
 
 
 X_train.to_csv('data/train_features.csv', index=False)
