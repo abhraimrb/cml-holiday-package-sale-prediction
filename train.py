@@ -8,7 +8,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.metrics import ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
-import numpy as np
+
 
 # Read in data
 X_train = pd.read_csv("data/train_features.csv")
