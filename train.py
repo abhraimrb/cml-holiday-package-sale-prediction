@@ -18,9 +18,9 @@ y_test = np.genfromtxt("data/test_labels.csv")
 
 # Fit a model
 depth = 2
-clf = RandomForestClassifier(max_depth=depth)
-pipe = Pipeline(steps = [
-            ('preprocessor', preprocessor), ('classifier', model)
+rf_model = RandomForestClassifier(max_depth=depth)
+pipe_rf = Pipeline(steps = [
+            ('preprocessor', preprocessor), ('classifier', rf_model)
         ])
 pipe_rf.fit(X_train, y_train)
 
@@ -31,6 +31,6 @@ with open("metrics.txt", "w") as outfile:
 
 # Plot it
 disp = ConfusionMatrixDisplay.from_estimator(
-    clf, X_test, y_test, normalize="true", cmap=plt.cm.Blues
+    rf_model, X_test, y_test, normalize="true", cmap=plt.cm.Blues
 )
 plt.savefig("plot.png")
