@@ -1,12 +1,6 @@
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.model_selection import train_test_split
+import pandas as pd
 
-from sklearn.impute import SimpleImputer
-from sklearn.model_selection import train_test_split
-import numpy as np
-import os
 # Find the data in the same folder as the current file
 package_sale_data = pd.read_csv('data/holiday_package_data.csv')
 package_sale_data = package_sale_data.drop(columns = ['CustomerID'])
