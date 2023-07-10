@@ -43,7 +43,7 @@ preprocessor = ColumnTransformer(transformers = [
         ], remainder = SimpleImputer(strategy = 'most_frequent')
     )
 # Fit a model
-depth = 2
+depth = 3
 rf_model = RandomForestClassifier(max_depth=depth)
 pipe_rf = Pipeline(steps = [
             ('preprocessor', preprocessor), ('classifier', rf_model)
