@@ -11,10 +11,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Read in data
-X_train = np.genfromtxt("data/train_features.csv")
-y_train = np.genfromtxt("data/train_labels.csv")
-X_test = np.genfromtxt("data/test_features.csv")
-y_test = np.genfromtxt("data/test_labels.csv")
+X_train = pd.read_csv("data/train_features.csv")
+y_train = pd.read_csv("data/train_labels.csv")
+X_test = pd.read_csv("data/test_features.csv")
+y_test = pd.read_csv("data/test_labels.csv")
 
 
 numeric_features = [
