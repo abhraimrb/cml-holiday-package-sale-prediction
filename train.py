@@ -57,6 +57,6 @@ with open("metrics.txt", "w") as outfile:
 
 # Plot it
 disp = ConfusionMatrixDisplay.from_estimator(
-    rf_model, X_test, y_test, normalize="true", cmap=plt.cm.Blues
+    pipe_rf, X_test, y_test, normalize="true", cmap=plt.cm.Blues
 )
 plt.savefig("plot.png")
